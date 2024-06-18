@@ -8,6 +8,7 @@ class Customer(models.Model):
     phone = models.CharField(max_length=30)
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(default=timezone.now)
+    photo = models.ImageField(upload_to='images/', blank=True, null=True)
 
     def __str__(self) -> str:
         return f'{self.first_name} {self.last_name}'
