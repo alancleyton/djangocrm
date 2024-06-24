@@ -1,10 +1,12 @@
-{% load static %}
+{% load static compress %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    {% compress css %}
+        <link type="text/x-scss" href="{% static 'scss/main.scss' %}" rel="stylesheet">
+    {% endcompress %}
     <title>Base template</title>
 </head>
 <body>

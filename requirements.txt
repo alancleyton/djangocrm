@@ -2,9 +2,15 @@ asgiref==3.8.1
 astroid==3.2.2
 dill==0.3.8
 Django==5.0.6
+django-appconf==1.0.6
+django-libsass==0.9
+django_compressor==4.5
 isort==5.13.2
+libsass==0.23.0
 mccabe==0.7.0
 pillow==10.3.0
 platformdirs==4.2.2
+rcssmin==1.1.2
+rjsmin==1.2.2
 sqlparse==0.5.0
 tomlkit==0.12.5
