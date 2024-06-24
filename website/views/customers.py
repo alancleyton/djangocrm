@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
+from website.models import Customer as CustomerModel
 
 def list_customers(request: HttpRequest) -> HttpResponse:
-    return HttpResponse(render(request, 'index.html', {}))
+    customers = CustomerModel.objects.all()
+    context = { 'customers': customers }
+    return HttpResponse(render(request, 'index.html', context))

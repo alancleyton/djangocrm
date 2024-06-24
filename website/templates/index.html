@@ -1,1 +1,11 @@
 {% extends "base.html" %}
+{% block content %}
+    <main class="customers-list">
+        {% for customer in customers  %}
+            <h4>
+                {{ customer.first_name }}
+                {{ customer.last_name }}
+            </h4>
+        {% endfor %}
+    </main>
+{% endblock content %}
