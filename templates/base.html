@@ -14,6 +14,32 @@
     <title>Base template</title>
 </head>
 <body>
+    <nav id="navBar" class="navbar">
+        <a class="navbar-brand" name="navbarBrand">
+            <img src="https://static.djangoproject.com/img/logos/django-logo-negative.svg" alt="logo" width="64px" />
+            <h2>CRM</h2>
+        </a>
+        <span class="navbar-vertical-divider">&nbsp;</span>
+        <a role="button" class="navbar-toggler" name="navbarToggler">
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+        </a>
+        <div class="navbar-menu">
+            <ul class="navbar-menu-items">
+                <li class="navbar-menu-item">
+                    <a class="navbar-link link-active">Customers</a>
+                </li>
+                <li class="navbar-menu-item">
+                    <a class="navbar-link">Contacts</a>
+                </li>
+                <li class="navbar-menu-item">
+                    <a class="navbar-link">Dashboard</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
     {% block content %}{% endblock content %}
 </body>
 </html>
