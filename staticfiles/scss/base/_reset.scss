@@ -5,7 +5,10 @@ html {
 html, body {
   margin: 0;
 	border: 0;
-  background-color: $color-white;
+  background-color: $color-gray-ice;
+  font-family: $font-lato;
+  color: $color-dark;
+  font-size: 16px;
 }
 
 *,
