@@ -1,0 +1,42 @@
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: $color-white;
+  box-shadow: $base-box-shadow;
+  margin-bottom: 1rem;
+
+  &-items {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  &-item {
+    font-family: $font-poppins;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-sm;
+    text-decoration: none;
+    color: $color-gray;
+
+    &:not(:first-child)::before {
+      content: '>';
+      text-align: center;
+      float: left;
+      margin: 0 0.5rem;
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  &-link {
+    font: inherit;
+    text-decoration: none;
+    color: $color-blue-violet;
+
+    &:hover,
+    &:active {
+      text-decoration: underline;
+    }
+  }
+}
