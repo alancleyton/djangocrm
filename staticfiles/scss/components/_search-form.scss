@@ -1,0 +1,26 @@
+.search-form {
+  margin: 0;
+
+  fieldset {
+    margin: 0;
+    border: none;
+
+    input {
+      width: 20rem;
+      padding: 0.5rem 0.75rem;
+      font-family: $font-lato;
+      font-weight: $font-weight-regular;
+      font-size: $font-size-md;
+      color: $color-white;
+      border-radius: 4px;
+      border: none;
+      outline: none;
+      background-color: $color-blue-violet-dark;
+
+      &::placeholder {
+        font-size: $font-size-sm;
+        color: $color-gray-7;
+      }
+    }
+  }
+}
