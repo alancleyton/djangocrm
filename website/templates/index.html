@@ -2,24 +2,52 @@
 {% block breadcrumb %}
 <nav class="breadcrumb">
     <ol class="breadcrumb-items">
-        <li class="breadcrumb-item">
+        {% comment %} <li class="breadcrumb-item">
             <a href="#" class="breadcrumb-link">Customers</a>
         </li>
         <li class="breadcrumb-item">
             <a href="#" class="breadcrumb-link">John Doe</a>
-        </li>
-        <li class="breadcrumb-item">Edit</li>
+        </li> {% endcomment %}
+        <li class="breadcrumb-item">Customers</li>
     </ol>
 </nav>
 {% endblock breadcrumb %}
 
 {% block content %}
     <main class="customers-list">
-        {% for customer in customers  %}
+        {% comment %} {% for customer in customers  %}
             <h4>
                 {{ customer.first_name }}
                 {{ customer.last_name }}
             </h4>
-        {% endfor %}
+        {% endfor %} {% endcomment %}
+        <div class="table">
+            <table>
+                <caption>Customers</caption>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Customer</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Company</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in customers %}
+                    <tr>
+                        <td><a href="#">{{ customer.id }}</a></td>
+                        <td>
+                            {{ customer.first_name }}
+                            {{ customer.last_name }}
+                        </td>
+                        <td>{{ customer.email }}</td>
+                        <td>{{ customer.phone }}</td>
+                        <td>{{ customer.company }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </main>
 {% endblock content %}
