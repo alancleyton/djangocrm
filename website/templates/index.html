@@ -2,25 +2,13 @@
 {% block breadcrumb %}
 <nav class="breadcrumb">
     <ol class="breadcrumb-items">
-        {% comment %} <li class="breadcrumb-item">
-            <a href="#" class="breadcrumb-link">Customers</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a href="#" class="breadcrumb-link">John Doe</a>
-        </li> {% endcomment %}
         <li class="breadcrumb-item">Customers</li>
     </ol>
 </nav>
 {% endblock breadcrumb %}
 
 {% block content %}
-    <main class="customers-list">
-        {% comment %} {% for customer in customers  %}
-            <h4>
-                {{ customer.first_name }}
-                {{ customer.last_name }}
-            </h4>
-        {% endfor %} {% endcomment %}
+    <main class="customers">
         <div class="table">
             <table>
                 <caption>Customers</caption>
@@ -36,7 +24,9 @@
                 <tbody>
                     {% for customer in customers %}
                     <tr>
-                        <td><a href="#">{{ customer.id }}</a></td>
+                        <td><a href="{% url "customer" customer.id %}">
+                            {{ customer.id }}
+                        </a></td>
                         <td>
                             {{ customer.first_name }}
                             {{ customer.last_name }}

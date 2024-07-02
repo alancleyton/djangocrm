@@ -4,5 +4,6 @@ from django.conf import settings
 from website.views import customers as customers_views
 
 urlpatterns = [
-    path('', customers_views.list_customers, name='list_customers')
+    path('', customers_views.list_customers, name='customers'),
+    path('<int:customer_id>/', customers_views.show_customer, name='customer')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

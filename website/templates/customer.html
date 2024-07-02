@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block breadcrumb %}
+<nav class="breadcrumb">
+    <ol class="breadcrumb-items">
+        <li class="breadcrumb-item">
+            <a href="{% url 'customers' %}" class="breadcrumb-link">
+                Customers
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            {{ customer.first_name }}
+            {{ customer.last_name }}
+        </li>
+    </ol>
+</nav>
+{% endblock breadcrumb %}
+
+{% block content %}
+    <main class="customer">
+        <div class="customer-card">
+            <div class="customer-profile">
+                <div class="customer-photo">
+                    <div class="customer-photo-fallback">
+                        <span>{{ customer_initials }}</span>
+                    </div>
+                </div>
+
+                <div class="customer-info">
+                    <div class="customer-info-group">
+                        <div class="customer-info-group-item">
+                            <span>Customer:</span>
+                            <h4>
+                                {{ customer.first_name }}
+                                {{ customer.last_name }}
+                            </h4>
+                        </div>
+
+                        <div class="customer-info-group-item">
+                            <span>Email Address:</span>
+                            <p>{{ customer.email }}</p>
+                        </div>
+
+                        <div class="customer-info-group-item">
+                            <span>Phone Number:</span>
+                            <p>{{ customer.phone }}</p>
+                        </div>
+
+                        <div class="customer-info-group-item">
+                            <span>Company:</span>
+                            <p>{{ customer.company.name }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock content %}
