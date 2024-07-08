@@ -49,4 +49,23 @@
       }
     }
   }
+
+  &-empty-state {
+    padding: 6rem 2rem;
+    text-align: center;
+
+    &-title {
+      font-family: $font-poppins;
+      font-size: $font-size-xl;
+      font-weight: $font-weight-semibold;
+      color: $color-gray;
+    }
+
+    &-text {
+      font-family: $font-lato;
+      font-size: $font-size-md;
+      font-weight: $font-weight-medium;
+      color: $color-gray-4;
+    }
+  }
 }

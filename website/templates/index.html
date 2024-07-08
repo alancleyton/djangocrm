@@ -38,6 +38,12 @@
                     {% endfor %}
                 </tbody>
             </table>
+            {% if not customers|length %}
+                <div class="table-empty-state">
+                    <h4 class="table-empty-state-title">No customers found</h4>
+                    <p class="table-empty-state-text">There are no customers to display here for now.</p>
+                </div>
+            {% endif %}
         </div>
     </main>
 {% endblock content %}
