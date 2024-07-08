@@ -15,7 +15,7 @@
 </head>
 <body>
     <nav id="navBar" class="navbar">
-        <a class="navbar-brand" name="navbarBrand">
+        <a class="navbar-brand" name="navbarBrand" href="{% url "customers" %}">
             <img src="https://static.djangoproject.com/img/logos/django-logo-negative.svg" alt="logo" width="64px" />
             <h2>CRM</h2>
         </a>
@@ -40,13 +40,14 @@
         </div>
 
         <div class="navbar-menu">
-            <form class="search-form">
+            <form class="search-form" action="{% url "search" %}">
                 <fieldset class="search-field">
                     <input class="search-field-input"
                         type="text"
                         id="search"
                         placeholder="Search for customer or contact..."
                         name="search"
+                        value="{{ request.GET.search.strip }}"
                     ></input>
                 </fieldset>
             </form>

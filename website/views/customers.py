@@ -1,9 +1,21 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpRequest, HttpResponse
 from website.models import Customer as CustomerModel
+from django.db.models import Q
 
 def list_customers(request: HttpRequest) -> HttpResponse:
     customers = CustomerModel.objects.all().order_by('-id')
+    context = { 'customers': customers }
+    return HttpResponse(render(request, 'index.html', context))
+
+def search_customers(request: HttpRequest) -> HttpResponse:
+    search = request.GET.get('search', '').strip()
+    customers = CustomerModel.objects.filter(
+        Q(first_name__icontains=search) |
+        Q(last_name__icontains=search) |
+        Q(email__icontains=search) |
+        Q(phone__icontains=search)
+    )
     context = { 'customers': customers }
     return HttpResponse(render(request, 'index.html', context))
 
