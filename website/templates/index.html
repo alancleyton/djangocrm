@@ -22,7 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for customer in customers %}
+                    {% for customer in page_customers %}
                     <tr>
                         <td><a href="{% url "customer" customer.id %}">
                             {{ customer.id }}
@@ -38,6 +38,31 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <div class="table-pagination">
+                <span class="table-pagination-steps">
+                    {% if page_customers.has_previous %}
+                        <a class="table-pagination-link" href="?page=1&search={{ request.GET.search.strip }}">
+                            &laquo; first
+                        </a>
+                        <a class="table-pagination-link" href="?page={{ page_customers.previous_page_number }}&search={{ request.GET.search.strip }}">
+                            previous
+                        </a>
+                    {% endif %}
+            
+                    <span class="table-pagination-current-page">
+                        Page {{ page_customers.number }} of {{ page_customers.paginator.num_pages }}.
+                    </span>
+            
+                    {% if page_customers.has_next %}
+                        <a class="table-pagination-link" href="?page={{ page_customers.next_page_number }}&search={{ request.GET.search.strip }}">
+                            next
+                        </a>
+                        <a class="table-pagination-link" href="?page={{ page_customers.paginator.num_pages }}&search={{ request.GET.search.strip }}">
+                            last &raquo;
+                        </a>
+                    {% endif %}
+                </span>
+            </div>
             {% if not customers|length %}
                 <div class="table-empty-state">
                     <h4 class="table-empty-state-title">No customers found</h4>

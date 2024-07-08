@@ -68,4 +68,30 @@
       color: $color-gray-4;
     }
   }
+
+  &-pagination {
+    margin: 1.5rem 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &-current-page {
+      padding: 0 0.5rem;
+      font-family: $font-lato;
+      font-size: $font-size-md;
+      font-weight: $font-weight-regular;
+      color: $color-gray;
+    }
+
+    &-link {
+      font-family: $font-lato;
+      font-size: $font-size-md;
+      color: $color-blue-violet;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }

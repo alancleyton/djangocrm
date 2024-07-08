@@ -2,10 +2,16 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpRequest, HttpResponse
 from website.models import Customer as CustomerModel
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 def list_customers(request: HttpRequest) -> HttpResponse:
     customers = CustomerModel.objects.all().order_by('-id')
-    context = { 'customers': customers }
+
+    paginated_customers = Paginator(customers, 10)
+    page_number = request.GET.get('page')
+    page_customers = paginated_customers.get_page(page_number)
+    
+    context = { 'customers': customers, 'page_customers': page_customers }
     return HttpResponse(render(request, 'index.html', context))
 
 def search_customers(request: HttpRequest) -> HttpResponse:
@@ -16,7 +22,12 @@ def search_customers(request: HttpRequest) -> HttpResponse:
         Q(email__icontains=search) |
         Q(phone__icontains=search)
     )
-    context = { 'customers': customers }
+
+    paginated_customers = Paginator(customers, 10)
+    page_number = request.GET.get('page')
+    page_customers = paginated_customers.get_page(page_number)
+
+    context = { 'customers': customers, 'page_customers': page_customers }
     return HttpResponse(render(request, 'index.html', context))
 
 def show_customer(request: HttpRequest, customer_id: int) -> HttpResponse:
