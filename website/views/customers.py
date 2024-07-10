@@ -1,8 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpRequest, HttpResponse
-from website.models import Customer as CustomerModel
 from django.db.models import Q
 from django.core.paginator import Paginator
+
+from website.models import Customer as CustomerModel
+from website.forms import customers as customers_forms
+
+def create(request: HttpRequest) -> HttpResponse:
+    context = {}
+    return HttpResponse(render(request, 'customers/create.html', context))
 
 def index(request: HttpRequest) -> HttpResponse:
     customers = CustomerModel.objects.all().order_by('-id')
