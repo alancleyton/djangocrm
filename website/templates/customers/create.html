@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block breadcrumb %}
+<nav class="breadcrumb">
+    <ol class="breadcrumb-items">
+        <li class="breadcrumb-item">
+            <a href="{% url 'customers' %}" class="breadcrumb-link">
+                Customers
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            Create
+        </li>
+    </ol>
+</nav>
+{% endblock breadcrumb %}
+
+{% block content %}
+    <main class="customer">
+        Create customer
+    </main>
+{% endblock content %}

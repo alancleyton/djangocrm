@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 
 urlpatterns = [
     path('', lambda r: HttpResponseRedirect('customers')),
-    path('customers', customers_views.list_customers, name='customers'),
-    path('customers/<int:customer_id>/details', customers_views.show_customer, name='customer'),
-    path('search/', customers_views.search_customers, name='search'),
+    path('customers', customers_views.index, name='customers'),
+    path('customers/<int:customer_id>/show', customers_views.show, name='customer'),
+    path('search/', customers_views.search, name='search'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
