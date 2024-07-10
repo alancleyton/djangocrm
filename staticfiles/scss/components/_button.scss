@@ -1,0 +1,79 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-poppins;
+  font-weight: $font-weight-medium;
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:disabled {
+    border-color: $color-gray-7;
+    color: $color-white;
+    background-color: $color-gray-7;
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  // Button size variants
+  &-sm {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  &-md {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+
+  &-lg {
+    padding: 1rem 1.25rem;
+    font-size: 1.25rem;
+  }
+
+  // Button color variants
+  &-primary {
+    border: solid 1px $color-blue-violet;
+    color: $color-white;
+    background-color: $color-blue-violet;
+
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
+      border-color: $color-blue-violet-light;
+      background-color: $color-blue-violet-light;
+    }
+
+    &:active:not(:disabled) {
+      border-color: $color-blue-violet-dark;
+      background-color: $color-blue-violet-dark;
+    }
+  }
+
+  &-primary-outline {
+    border: solid 1px $color-blue-violet;
+    color: $color-blue-violet;
+    background-color: transparent;
+
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
+      color: $color-white;
+      background-color: $color-blue-violet;
+    }
+
+    &:active:not(:disabled) {
+      border-color: $color-blue-violet-dark;
+      background-color: $color-blue-violet-dark;
+    }
+  }
+}
