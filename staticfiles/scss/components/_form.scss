@@ -1,0 +1,88 @@
+.form {
+  &.two-cols {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    flex-direction: column;
+
+    @media (min-width: $media-breakpoint-md) {
+      flex-direction: row;
+    }
+  }
+
+  &.col {
+    flex: 1;
+    width: 100%;
+  }
+
+  &-group {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    &-sm {
+      > input, textarea {
+        font-size: $font-size-sm;
+        padding: 0.5rem 0.75rem;
+      }
+    }
+  
+    &-md {
+      > input, textarea {
+        font-size: $font-size-md;
+        padding: 0.75rem 1rem;
+      }
+    }
+  
+    &-lg {
+      > input, textarea {
+        font-size: $font-size-lg;
+        padding: 1rem 1.25rem;
+      }
+    }
+
+    &-full {
+      width: 100%;
+    }
+  }
+
+  &-label {
+    margin-bottom: 0.75rem;
+    font-family: $font-poppins;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-md;
+    line-height: 1.5;
+    color:  $color-gray;
+  }
+
+  &-control {
+    outline: none;
+    border: 1px solid $color-gray-8;
+    border-radius: 4px;
+    width: 100%;
+    font-family: $font-poppins;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    text-indent: none;
+    color: $color-gray;
+    transition: all 0.3s ease;
+
+    &::placeholder {
+      color: $color-gray-6;
+    }
+
+    &:hover:enabled,
+    &:focus:enabled {
+      border-color: $color-gray;
+    }
+  }
+
+  &-full {
+    width: 100%;
+  }
+}
