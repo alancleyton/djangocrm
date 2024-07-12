@@ -9,67 +9,77 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-    <main class="customers">
-        <div class="table">
-            <table>
-                <caption>Customers</caption>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Customer</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Company</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for customer in page_customers %}
-                    <tr>
-                        <td><a href="{% url "customer" customer.id %}">
-                            {{ customer.id }}
-                        </a></td>
-                        <td>
-                            {{ customer.first_name }}
-                            {{ customer.last_name }}
-                        </td>
-                        <td>{{ customer.email }}</td>
-                        <td>{{ customer.phone }}</td>
-                        <td>{{ customer.company }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <div class="table-pagination">
-                <span class="table-pagination-steps">
-                    {% if page_customers.has_previous %}
-                        <a class="table-pagination-link" href="?page=1&search={{ request.GET.search.strip }}">
-                            &laquo; first
-                        </a>
-                        <a class="table-pagination-link" href="?page={{ page_customers.previous_page_number }}&search={{ request.GET.search.strip }}">
-                            previous
-                        </a>
-                    {% endif %}
-            
-                    <span class="table-pagination-current-page">
-                        Page {{ page_customers.number }} of {{ page_customers.paginator.num_pages }}.
-                    </span>
-            
-                    {% if page_customers.has_next %}
-                        <a class="table-pagination-link" href="?page={{ page_customers.next_page_number }}&search={{ request.GET.search.strip }}">
-                            next
-                        </a>
-                        <a class="table-pagination-link" href="?page={{ page_customers.paginator.num_pages }}&search={{ request.GET.search.strip }}">
-                            last &raquo;
-                        </a>
-                    {% endif %}
-                </span>
+    <main class="page customers">
+        <div class="page-header">
+            <h2 class="page-header-title">Customers</h2>
+            <div class="page-header-buttons">
+                <button class="button button-primary-outline button-md">
+                    New customer
+                </button>
             </div>
-            {% if not customers|length %}
-                <div class="table-empty-state">
-                    <h4 class="table-empty-state-title">No customers found</h4>
-                    <p class="table-empty-state-text">There are no customers to display here for now.</p>
+        </div>
+
+        <div class="card">
+            <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Company</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for customer in page_customers %}
+                        <tr>
+                            <td><a href="{% url "customer" customer.id %}">
+                                {{ customer.id }}
+                            </a></td>
+                            <td>
+                                {{ customer.first_name }}
+                                {{ customer.last_name }}
+                            </td>
+                            <td>{{ customer.email }}</td>
+                            <td>{{ customer.phone }}</td>
+                            <td>{{ customer.company }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="table-pagination">
+                    <span class="table-pagination-steps">
+                        {% if page_customers.has_previous %}
+                            <a class="table-pagination-link" href="?page=1&search={{ request.GET.search.strip }}">
+                                &laquo; first
+                            </a>
+                            <a class="table-pagination-link" href="?page={{ page_customers.previous_page_number }}&search={{ request.GET.search.strip }}">
+                                previous
+                            </a>
+                        {% endif %}
+                
+                        <span class="table-pagination-current-page">
+                            Page {{ page_customers.number }} of {{ page_customers.paginator.num_pages }}.
+                        </span>
+                
+                        {% if page_customers.has_next %}
+                            <a class="table-pagination-link" href="?page={{ page_customers.next_page_number }}&search={{ request.GET.search.strip }}">
+                                next
+                            </a>
+                            <a class="table-pagination-link" href="?page={{ page_customers.paginator.num_pages }}&search={{ request.GET.search.strip }}">
+                                last &raquo;
+                            </a>
+                        {% endif %}
+                    </span>
                 </div>
-            {% endif %}
+                {% if not customers|length %}
+                    <div class="table-empty-state">
+                        <h4 class="table-empty-state-title">No customers found</h4>
+                        <p class="table-empty-state-text">There are no customers to display here for now.</p>
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </main>
 {% endblock content %}
