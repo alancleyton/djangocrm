@@ -49,40 +49,57 @@
     &-full {
       width: 100%;
     }
-  }
 
-  &-label {
-    margin-bottom: 0.75rem;
-    font-family: $font-poppins;
-    font-weight: $font-weight-medium;
-    font-size: $font-size-md;
-    line-height: 1.5;
-    color:  $color-gray;
-  }
-
-  &-control {
-    outline: none;
-    border: 1px solid $color-gray-8;
-    border-radius: 4px;
-    width: 100%;
-    font-family: $font-poppins;
-    font-weight: $font-weight-medium;
-    text-decoration: none;
-    text-indent: none;
-    color: $color-gray;
-    transition: all 0.3s ease;
-
-    &::placeholder {
-      color: $color-gray-6;
+    label {
+      margin-bottom: 0.75rem;
+      font-family: $font-poppins;
+      font-weight: $font-weight-medium;
+      font-size: $font-size-md;
+      line-height: 1.5;
+      color:  $color-gray;
     }
 
-    &:hover:enabled,
-    &:focus:enabled {
-      border-color: $color-gray;
+    input, textarea {
+      outline: none;
+      border: 1px solid $color-gray-8;
+      border-radius: 4px;
+      width: 100%;
+      font-family: $font-poppins;
+      font-weight: $font-weight-medium;
+      text-decoration: none;
+      text-indent: none;
+      color: $color-gray;
+      transition: all 0.3s ease;
+  
+      &::placeholder {
+        color: $color-gray-6;
+      }
+  
+      &:hover:enabled,
+      &:focus:enabled {
+        border-color: $color-gray;
+      }
+    }
+
+    &.is-invalid {
+      > label {
+        color: $color-red;
+      }
+      > input {
+        border-color: $color-red;
+
+        &:hover:enabled,
+        &:focus:enabled {
+          border-color: $color-red;
+        }
+      }
     }
   }
 
-  &-full {
-    width: 100%;
+  .errorlist {
+    font-family: $font-poppins;
+    font-weight: $font-weight-regular;
+    font-size: $font-size-sm;
+    color: $color-red;
   }
 }
