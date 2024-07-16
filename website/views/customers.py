@@ -6,8 +6,13 @@ from django.core.paginator import Paginator
 from website.models import Customer as CustomerModel
 from website.forms import customers as customers_forms
 
-def create(request: HttpRequest) -> HttpResponse:
-    context = {}
+def create(request: HttpRequest) -> HttpResponse:    
+    if request.method == 'POST':
+        customer_form = customers_forms.CreateForm(request.POST)
+    else:
+        customer_form = customers_forms.CreateForm()
+    
+    context = { 'form': customer_form }
     return HttpResponse(render(request, 'customers/create.html', context))
 
 def index(request: HttpRequest) -> HttpResponse:
