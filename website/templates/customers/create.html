@@ -22,34 +22,30 @@
         </div>
 
         <div class="card">
-            <form class="form two-cols" action="" method="POST" enctype="multipart/form-data">
+            <form class="form" action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="form col">
-                    <div class="form-group form-group-md form-group-full {% if form.first_name.errors %}is-invalid{% endif %}">
-                        <label for="{{ form.first_name.id_for_label }}">First name</label>
-                        {{ form.first_name }}
-                        {{ form.first_name.errors }}
-                    </div>
-    
-                    <div class="form-group form-group-md form-group-full {% if form.last_name.errors %}is-invalid{% endif %}">
-                        <label for="{{ form.last_name.id_for_label }}">Last name</label>
-                        {{ form.last_name }}
-                        {{ form.last_name.errors }}
-                    </div>  
+                <div class="form-group form-group-md form-group-full {% if form.first_name.errors %}is-invalid{% endif %}">
+                    <label for="{{ form.first_name.id_for_label }}">First name</label>
+                    {{ form.first_name }}
+                    {{ form.first_name.errors }}
                 </div>
 
-                <div class="form col">
-                    <div class="form-group form-group-md form-group-full {% if form.email_name.errors %}is-invalid{% endif %}">
-                        <label for="{{ form.email.id_for_label }}">E-mail address</label>
-                        {{ form.email }}
-                        {{ form.email.errors }}
-                    </div>  
-    
-                    <div class="form-group form-group-md form-group-full {% if form.phone.errors %}is-invalid{% endif %}">
-                        <label for="{{ form.phone.id_for_label }}">Phone number</label>
-                        {{ form.phone }}
-                        {{ form.phone.errors }}
-                    </div>
+                <div class="form-group form-group-md form-group-full {% if form.last_name.errors %}is-invalid{% endif %}">
+                    <label for="{{ form.last_name.id_for_label }}">Last name</label>
+                    {{ form.last_name }}
+                    {{ form.last_name.errors }}
+                </div>
+
+                <div class="form-group form-group-md form-group-full {% if form.email.errors %}is-invalid{% endif %}">
+                    <label for="{{ form.email.id_for_label }}">E-mail address</label>
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </div>  
+
+                <div class="form-group form-group-md form-group-full {% if form.phone.errors %}is-invalid{% endif %}">
+                    <label for="{{ form.phone.id_for_label }}">Phone number</label>
+                    {{ form.phone }}
+                    {{ form.phone.errors }}
                 </div>
 
                 <div class="form-group form-group-md form-group-full {% if form.description.errors %}is-invalid{% endif %}">
