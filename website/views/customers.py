@@ -2,15 +2,18 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpRequest, HttpResponse
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.contrib.auth.models import User as UserModel
 
 from website.models import Customer as CustomerModel
 from website.forms import customers as customers_forms
 
-def create(request: HttpRequest) -> HttpResponse:    
+def create(request: HttpRequest) -> HttpResponse:
+    all_users =  UserModel.objects.values()
+
     if request.method == 'POST':
-        customer_form = customers_forms.CreateForm(request.POST)
+        customer_form = customers_forms.CreateForm(request.POST, all_users=all_users)
     else:
-        customer_form = customers_forms.CreateForm()
+        customer_form = customers_forms.CreateForm(all_users=all_users)
     
     context = { 'form': customer_form }
     return HttpResponse(render(request, 'customers/create.html', context))
