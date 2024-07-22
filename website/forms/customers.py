@@ -29,4 +29,5 @@ class CreateForm(forms.Form):
         data = self.cleaned_data
         data['company'] = Company.objects.get(pk=data['company'])
         data['owner'] = User.objects.get(pk=data['owner'])
-        Customer.objects.create(**data)
+        customer = Customer(**data)
+        customer.save()
