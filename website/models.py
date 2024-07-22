@@ -1,5 +1,6 @@
 # pylint: disable=missing-module-docstring
 # pylint: disable=missing-class-docstring
+from typing import Iterable
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -27,3 +28,7 @@ class Customer(models.Model):
 
     def __str__(self) -> str:
         return f'{self.first_name} {self.last_name}'
+    
+    def create(self, data=None):
+        customer = self.insert(data)
+        return customer

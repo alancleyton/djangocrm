@@ -1,27 +1,30 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpRequest, HttpResponse
 from django.db.models import Q
 from django.core.paginator import Paginator
-from django.contrib.auth.models import User as UserModel
+from django.contrib.auth.models import User
 
-from website.models import Customer as CustomerModel
-from website.models import Company as CompanyModel
-from website.forms import customers as customers_forms
+from website.models import Customer
+from website.models import Company
+from website.forms.customers import CreateForm
 
 def create(request: HttpRequest) -> HttpResponse:
-    all_users =  UserModel.objects.values()
-    all_companies = CompanyModel.objects.values()
+    all_users =  User.objects.values()
+    all_companies = Company.objects.values()
 
     if request.method == 'POST':
-        customer_form = customers_forms.CreateForm(request.POST, all_users=all_users, all_companies=all_companies)
+        form = CreateForm(request.POST or None, all_users=all_users, all_companies=all_companies)
+        if form.is_valid():
+            form.save()
+            return redirect('customers')
     else:
-        customer_form = customers_forms.CreateForm(all_users=all_users, all_companies=all_companies)
+        form = CreateForm(all_users=all_users, all_companies=all_companies)
     
-    context = { 'form': customer_form }
+    context = { 'form': form }
     return HttpResponse(render(request, 'customers/create.html', context))
 
 def index(request: HttpRequest) -> HttpResponse:
-    customers = CustomerModel.objects.all().order_by('-id')
+    customers = Customer.objects.all().order_by('-id')
 
     paginated_customers = Paginator(customers, 10)
     page_number = request.GET.get('page')
@@ -31,14 +34,14 @@ def index(request: HttpRequest) -> HttpResponse:
     return HttpResponse(render(request, 'customers/index.html', context))
 
 def show(request: HttpRequest, customer_id: int) -> HttpResponse:
-    customer = get_object_or_404(CustomerModel, pk=customer_id)
+    customer = get_object_or_404(Customer, pk=customer_id)
     customer_initials = customer.first_name[0] + customer.last_name[0]
     context = { 'customer': customer, 'customer_initials': customer_initials }
     return HttpResponse(render(request, 'customers/show.html', context))
 
 def search(request: HttpRequest) -> HttpResponse:
     search = request.GET.get('search', '').strip()
-    customers = CustomerModel.objects.filter(
+    customers = Customer.objects.filter(
         Q(first_name__icontains=search) |
         Q(last_name__icontains=search) |
         Q(email__icontains=search) |
