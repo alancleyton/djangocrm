@@ -9,16 +9,16 @@ from website.models import Company
 from website.forms.customers import CreateForm
 
 def create(request: HttpRequest) -> HttpResponse:
-    all_users =  User.objects.values()
-    all_companies = Company.objects.values()
+    users =  User.objects.values()
+    companies = Company.objects.values()
 
     if request.method == 'POST':
-        form = CreateForm(request.POST or None, all_users=all_users, all_companies=all_companies)
+        form = CreateForm(request.POST or None, users=users, companies=companies)
         if form.is_valid():
             form.save()
             return redirect('customers')
     else:
-        form = CreateForm(all_users=all_users, all_companies=all_companies)
+        form = CreateForm(users=users, companies=companies)
     
     context = { 'form': form }
     return HttpResponse(render(request, 'customers/create.html', context))

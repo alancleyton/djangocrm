@@ -15,8 +15,8 @@ class CreateForm(forms.Form):
     description = forms.CharField(widget=forms.Textarea())
 
     def __init__(self, *args, **kwargs):
-        self.users = kwargs.pop('all_users')
-        self.companies = kwargs.pop('all_companies')
+        self.users = kwargs.pop('users')
+        self.companies = kwargs.pop('companies')
         super(CreateForm, self).__init__(*args, **kwargs)
         
         users_choices = tuple([(user['id'], user['username']) for user in self.users])
