@@ -5,15 +5,17 @@ from django.core.paginator import Paginator
 from django.contrib.auth.models import User as UserModel
 
 from website.models import Customer as CustomerModel
+from website.models import Company as CompanyModel
 from website.forms import customers as customers_forms
 
 def create(request: HttpRequest) -> HttpResponse:
     all_users =  UserModel.objects.values()
+    all_companies = CompanyModel.objects.values()
 
     if request.method == 'POST':
-        customer_form = customers_forms.CreateForm(request.POST, all_users=all_users)
+        customer_form = customers_forms.CreateForm(request.POST, all_users=all_users, all_companies=all_companies)
     else:
-        customer_form = customers_forms.CreateForm(all_users=all_users)
+        customer_form = customers_forms.CreateForm(all_users=all_users, all_companies=all_companies)
     
     context = { 'form': customer_form }
     return HttpResponse(render(request, 'customers/create.html', context))
