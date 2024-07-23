@@ -20,7 +20,16 @@ def create(request: HttpRequest) -> HttpResponse:
 
 def update(request: HttpRequest, customer_id: int) -> HttpResponse:
     customer = get_object_or_404(Customer, pk=customer_id)
-    context = { 'customer': customer }
+
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            return redirect('customers')
+    else:
+        form = CustomerForm(instance=customer)
+
+    context = { 'customer': customer, 'form': form }
     return HttpResponse(render(request, 'customers/update.html', context))
 
 def index(request: HttpRequest) -> HttpResponse:
