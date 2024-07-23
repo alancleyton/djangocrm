@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block breadcrumb %}
+<nav class="breadcrumb">
+    <ol class="breadcrumb-items">
+        <li class="breadcrumb-item">
+            <a href="{% url 'customers' %}" class="breadcrumb-link">
+                Customers
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            {{ customer.first_name }}
+            {{ customer.last_name }}
+        </li>
+        <li class="breadcrumb-item">
+            Update
+        </li>
+    </ol>
+</nav>
+{% endblock breadcrumb %}
+
+{% block content %}
+    <main class="page customer">
+        <div class="page-header">
+            <h2 class="page-header-title">Update customer</h2>
+        </div>
+
+        <div class="card">
+            <form class="form" action="{% url 'update' customer.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                Update customer form
+            </form>
+        </div>
+    </main>
+{% endblock content %}

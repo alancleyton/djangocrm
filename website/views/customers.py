@@ -23,6 +23,11 @@ def create(request: HttpRequest) -> HttpResponse:
     context = { 'form': form }
     return HttpResponse(render(request, 'customers/create.html', context))
 
+def update(request: HttpRequest, customer_id: int) -> HttpResponse:
+    customer = get_object_or_404(Customer, pk=customer_id)
+    context = { 'customer': customer }
+    return HttpResponse(render(request, 'customers/update.html', context))
+
 def index(request: HttpRequest) -> HttpResponse:
     customers = Customer.objects.all().order_by('-id')
 

@@ -13,7 +13,10 @@
         <div class="page-header">
             <h2 class="page-header-title">Customers</h2>
             <div class="page-header-buttons">
-                <button class="button button-primary-outline button-md" onclick="location.href='{% url 'create' %}'">
+                <button
+                    class="button button-primary-outline button-md"
+                    onclick="location.href='{% url 'create' %}'"
+                >
                     New customer
                 </button>
             </div>
@@ -29,12 +32,13 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Company</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for customer in page_customers %}
                         <tr>
-                            <td><a href="{% url "customer" customer.id %}">
+                            <td><a href="{% url 'customer' customer.id %}">
                                 {{ customer.id }}
                             </a></td>
                             <td>
@@ -44,6 +48,14 @@
                             <td>{{ customer.email }}</td>
                             <td>{{ customer.phone }}</td>
                             <td>{{ customer.company }}</td>
+                            <td>
+                                <button
+                                    class="button button-primary-outline button-md"
+                                    onclick="location.href='{% url 'update' customer.id %}'"
+                                >
+                                    Update
+                                </button>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
