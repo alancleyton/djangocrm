@@ -2,23 +2,18 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpRequest, HttpResponse
 from django.db.models import Q
 from django.core.paginator import Paginator
-from django.contrib.auth.models import User
 
 from website.models import Customer
-from website.models import Company
-from website.forms.customers import CreateForm
+from website.forms.customers import CustomerForm
 
 def create(request: HttpRequest) -> HttpResponse:
-    users =  User.objects.values()
-    companies = Company.objects.values()
-
     if request.method == 'POST':
-        form = CreateForm(request.POST or None, users=users, companies=companies)
+        form = CustomerForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('customers')
     else:
-        form = CreateForm(users=users, companies=companies)
+        form = CustomerForm()
     
     context = { 'form': form }
     return HttpResponse(render(request, 'customers/create.html', context))
