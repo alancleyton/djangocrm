@@ -11,5 +11,6 @@ urlpatterns = [
     path('customers/create', customers_views.create, name='create'),
     path('customers/<int:customer_id>/update', customers_views.update, name='update'),
     path('customers/<int:customer_id>/show', customers_views.show, name='customer'),
+    path('customers/<int:customer_id>/delete', customers_views.delete, name='delete'),
     path('search/', customers_views.search, name='search'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

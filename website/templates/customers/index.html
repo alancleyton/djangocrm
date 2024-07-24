@@ -49,12 +49,20 @@
                             <td>{{ customer.phone }}</td>
                             <td>{{ customer.company }}</td>
                             <td>
-                                <button
-                                    class="button button-primary-outline button-md"
-                                    onclick="location.href='{% url 'update' customer.id %}'"
-                                >
-                                    Update
-                                </button>
+                                <div class="d-flex items-center gap-md">
+                                    <button
+                                        class="button button-primary-outline button-md"
+                                        onclick="location.href='{% url 'update' customer.id %}'"
+                                    >
+                                        Update
+                                    </button>
+                                    <form action="{% url "delete" customer.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" class="button button-danger-outline button-md">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         {% endfor %}

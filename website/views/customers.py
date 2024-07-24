@@ -48,6 +48,11 @@ def show(request: HttpRequest, customer_id: int) -> HttpResponse:
     context = { 'customer': customer, 'customer_initials': customer_initials }
     return HttpResponse(render(request, 'customers/show.html', context))
 
+def delete(request: HttpRequest, customer_id: int) -> HttpResponse:
+    customer = get_object_or_404(Customer, pk=customer_id)
+    customer.delete()
+    return redirect('customers')
+
 def search(request: HttpRequest) -> HttpResponse:
     search = request.GET.get('search', '').strip()
     customers = Customer.objects.filter(

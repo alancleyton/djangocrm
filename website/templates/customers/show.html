@@ -30,9 +30,12 @@
                 >
                     Update
                 </a>
-                <button class="button button-danger-outline button-md">
-                    Delete
-                </button>
+                <form action="{% url "delete" customer.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="button button-danger-outline button-md">
+                        Delete
+                    </button>
+                </form>
             </div>
         </div>
         <div class="card">

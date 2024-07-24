@@ -1,0 +1,25 @@
+.d-flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.gap {
+  &-none {
+    gap: 0;
+  }
+
+  &-sm {
+    gap: 0.5rem;
+  }
+
+  &-md {
+    gap: 1rem;
+  }
+
+  &-lg {
+    gap: 1.5rem;
+  }
+}
