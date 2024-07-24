@@ -41,9 +41,13 @@
         <div class="card">
             <div class="customer-profile">
                 <div class="customer-photo">
+                    {% if customer.photo %}
+                        <img class="customer-photo-image" src="{{ customer.photo.url }}" alt="photo" />
+                    {% else %}
                     <div class="customer-photo-fallback">
                         <span>{{ customer_initials }}</span>
                     </div>
+                    {% endif %}
                 </div>
 
                 <div class="customer-info">
@@ -69,6 +73,11 @@
                         <div class="customer-info-group-item">
                             <span>Company:</span>
                             <p>{{ customer.company.name }}</p>
+                        </div>
+
+                        <div class="customer-info-group-item">
+                            <span>Description:</span>
+                            <p>{{ customer.description }}</p>
                         </div>
                     </div>
                 </div>
