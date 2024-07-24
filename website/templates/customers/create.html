@@ -60,6 +60,16 @@
                     {{ form.company.errors }}
                 </div>
 
+                <div class="form-group form-group-md form-group-full {% if form.photo.errors %}is-invalid{% endif %}">
+                    <label for="{{ form.photo.id_for_label }}">Photo</label>
+                    {{ form.photo }}
+                    {{ form.photo.errors }}
+
+                    {% if form.photo.value.url %}
+                        <img src={{ form.photo.value.url }} alt="{{ customer.first_name}} {{ customer.last_name }}" />
+                    {% endif %}
+                </div>
+
                 <div class="form-group form-group-md form-group-full {% if form.description.errors %}is-invalid{% endif %}">
                     <label for="{{ form.description.id_for_label }}">Description</label>
                     {{ form.description }}

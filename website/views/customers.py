@@ -8,7 +8,7 @@ from website.forms.customers import CustomerForm
 
 def create(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
-        form = CustomerForm(request.POST)
+        form = CustomerForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('customers')
@@ -21,7 +21,7 @@ def update(request: HttpRequest, customer_id: int) -> HttpResponse:
     customer = get_object_or_404(Customer, pk=customer_id)
 
     if request.method == 'POST':
-        form = CustomerForm(request.POST, instance=customer)
+        form = CustomerForm(request.POST, request.FILES, instance=customer)
         if form.is_valid():
             form.save()
             return redirect('customers')
