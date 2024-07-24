@@ -4,6 +4,13 @@
     align-items: start;
   }
 
+  &-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+  }
+
   &-info {
     &-group {
       display: flex;

@@ -24,8 +24,14 @@
         <div class="page-header">
             <h2 class="page-header-title">Customer details</h2>
             <div class="page-header-buttons">
-                <button class="button button-primary-outline button-md">
-                    Edit customer
+                <a
+                    href="{% url "update" customer.id %}"
+                    class="button button-link button-primary-outline button-md"
+                >
+                    Update
+                </a>
+                <button class="button button-danger-outline button-md">
+                    Delete
                 </button>
             </div>
         </div>

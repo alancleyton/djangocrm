@@ -42,6 +42,10 @@
     font-size: 1.25rem;
   }
 
+  &-link {
+    text-decoration: none;
+  }
+
   // Button color variants
   &-primary {
     border: solid 1px $color-blue-violet;
@@ -58,22 +62,58 @@
       border-color: $color-blue-violet-dark;
       background-color: $color-blue-violet-dark;
     }
+
+    &-outline {
+      border: solid 1px $color-blue-violet;
+      color: $color-blue-violet;
+      background-color: transparent;
+  
+      &:hover:not(:disabled),
+      &:focus:not(:disabled) {
+        color: $color-white;
+        background-color: $color-blue-violet;
+      }
+  
+      &:active:not(:disabled) {
+        border-color: $color-blue-violet-dark;
+        background-color: $color-blue-violet-dark;
+      }
+    }
   }
 
-  &-primary-outline {
-    border: solid 1px $color-blue-violet;
-    color: $color-blue-violet;
-    background-color: transparent;
+  // Button danger
+  &-danger {
+    border: solid 1px $color-red;
+    color: $color-white;
+    background-color: $color-red;
 
     &:hover:not(:disabled),
     &:focus:not(:disabled) {
-      color: $color-white;
-      background-color: $color-blue-violet;
+      border-color: $color-red-light;
+      background-color: $color-red-light;
     }
 
     &:active:not(:disabled) {
-      border-color: $color-blue-violet-dark;
-      background-color: $color-blue-violet-dark;
+      border-color: $color-red-dark;
+      background-color: $color-red-dark;
+    }
+
+    &-outline {
+      border: solid 1px $color-red;
+      color: $color-red;
+      background-color: transparent;
+  
+      &:hover:not(:disabled),
+      &:focus:not(:disabled) {
+        color: $color-white;
+        background-color: $color-red;
+      }
+  
+      &:active:not(:disabled) {
+        border-color: $color-red-dark;
+        background-color: $color-red-dark;
+      }
     }
   }
+  
 }
