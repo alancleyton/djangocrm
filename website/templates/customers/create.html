@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block breadcrumb %}
 <nav class="breadcrumb">
@@ -62,12 +63,15 @@
 
                 <div class="form-group form-group-md form-group-full {% if form.photo.errors %}is-invalid{% endif %}">
                     <label for="{{ form.photo.id_for_label }}">Photo</label>
+                    <div class="photo-preview">
+                        <img
+                            id="photoPreview"
+                            class="photo-preview-image"
+                            src="https://www.prescriptum.com.br/wp-content/uploads/2015/12/placeholder-usuario-500x500.jpg"
+                        >
+                    </div>
                     {{ form.photo }}
                     {{ form.photo.errors }}
-
-                    {% if form.photo.value.url %}
-                        <img src={{ form.photo.value.url }} alt="{{ customer.first_name}} {{ customer.last_name }}" />
-                    {% endif %}
                 </div>
 
                 <div class="form-group form-group-md form-group-full {% if form.description.errors %}is-invalid{% endif %}">
@@ -83,3 +87,7 @@
         </div>
     </main>
 {% endblock content %}
+
+{% block javascript %}
+    <script src="{% static 'javascript/photoPreview.js' %}"></script>
+{% endblock javascript %}
