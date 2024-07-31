@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpRequest, HttpResponse
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 from website.models import Customer
 from website.forms.customers import CustomerForm
@@ -11,6 +12,7 @@ def create(request: HttpRequest) -> HttpResponse:
         form = CustomerForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Customer successfully created!')
             return redirect('customers')
         return render(request, 'customers/create.html', { 'form': form })
 

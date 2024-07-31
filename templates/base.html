@@ -14,6 +14,14 @@
     <title>Base template</title>
 </head>
 <body>
+    {% if messages %}
+        {% for message in messages %}
+            <div id="toastBar" class="toast {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
     <nav id="navBar" class="navbar">
         <a class="navbar-brand" name="navbarBrand" href="{% url "customers" %}">
             <img src="https://static.djangoproject.com/img/logos/django-logo-negative.svg" alt="logo" width="64px" />
@@ -53,8 +61,14 @@
             </form>
         </div>
     </nav>
+
     {% block breadcrumb %}{% endblock breadcrumb %}
     {% block content %}{% endblock content %}
+
+    {% if True %}
+        <script src="{% static 'javascript/toast.js' %}"></script>
+    {% endif %}
+
     {% block javascript %}{% endblock javascript %}
 </body>
 </html>
