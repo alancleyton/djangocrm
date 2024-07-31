@@ -12,10 +12,9 @@ def create(request: HttpRequest) -> HttpResponse:
         if form.is_valid():
             form.save()
             return redirect('customers')
-    
-    return HttpResponse(render(request, 'customers/create.html', {
-        'form': CustomerForm()
-    }))
+        return render(request, 'customers/create.html', { 'form': form })
+
+    return render(request, 'customers/create.html', { 'form': CustomerForm() })
 
 def update(request: HttpRequest, customer_id: int) -> HttpResponse:
     customer = get_object_or_404(Customer, pk=customer_id)
@@ -25,32 +24,36 @@ def update(request: HttpRequest, customer_id: int) -> HttpResponse:
         if form.is_valid():
             form.save()
             return redirect('customers')
+        
+        render(request, 'customers/update.html', {
+            'customer': customer,
+            'form': form,
+        })
     
-    return HttpResponse(render(request, 'customers/update.html', {
+    return render(request, 'customers/update.html', {
         'customer': customer,
         'form': CustomerForm(instance=customer)
-    }))
+    }) 
 
 def index(request: HttpRequest) -> HttpResponse:
     customers = Customer.objects.all().order_by('-id')
-
     paginated_customers = Paginator(customers, 10)
     page_number = request.GET.get('page')
     page_customers = paginated_customers.get_page(page_number)
-    
-    return HttpResponse(render(request, 'customers/index.html', {
+
+    return render(request, 'customers/index.html', {
         'customers': customers,
         'page_customers': page_customers
-    }))
+    })
 
 def show(request: HttpRequest, customer_id: int) -> HttpResponse:
     customer = get_object_or_404(Customer, pk=customer_id)
     customer_initials = customer.first_name[0] + customer.last_name[0]
 
-    return HttpResponse(render(request, 'customers/show.html', {
+    return render(request, 'customers/show.html', {
         'customer': customer,
         'customer_initials': customer_initials
-    }))
+    })
 
 def delete(request: HttpRequest, customer_id: int) -> HttpResponse:
     customer = get_object_or_404(Customer, pk=customer_id)
@@ -70,8 +73,9 @@ def search(request: HttpRequest) -> HttpResponse:
     page_number = request.GET.get('page')
     page_customers = paginated_customers.get_page(page_number)
 
-    return HttpResponse(render(request, 'customers/index.html', {
+    render(request, 'customers/index.html', {
         'customers': customers,
         'page_customers': page_customers
-    }))
+    })
+    
 
