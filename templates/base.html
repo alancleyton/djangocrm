@@ -22,45 +22,60 @@
         {% endfor %}
     {% endif %}
 
-    <nav id="navBar" class="navbar">
-        <a class="navbar-brand" name="navbarBrand" href="{% url "customers" %}">
-            <img src="https://static.djangoproject.com/img/logos/django-logo-negative.svg" alt="logo" width="64px" />
-            <h2>CRM</h2>
-        </a>
-        <span class="navbar-vertical-divider">&nbsp;</span>
-        <a role="button" class="navbar-toggler" name="navbarToggler">
-            <span>&nbsp;</span>
-            <span>&nbsp;</span>
-            <span>&nbsp;</span>
-        </a>
-        <div class="navbar-menu">
-            <ul class="navbar-menu-items">
-                <li class="navbar-menu-item">
-                    <a class="navbar-link link-active">Customers</a>
-                </li>
-                <li class="navbar-menu-item">
-                    <a class="navbar-link">Contacts</a>
-                </li>
-                <li class="navbar-menu-item">
-                    <a class="navbar-link">Dashboard</a>
-                </li>
-            </ul>
-        </div>
+    {% if request.path != '/register/' %}
+        <nav id="navBar" class="navbar">
+            <a class="navbar-brand" name="navbarBrand" href="{% url "customers" %}">
+                <img src="https://static.djangoproject.com/img/logos/django-logo-negative.svg" alt="logo" width="64px" />
+                <h2>CRM</h2>
+            </a>
+            <span class="navbar-vertical-divider">&nbsp;</span>
+            <a role="button" class="navbar-toggler" name="navbarToggler">
+                <span>&nbsp;</span>
+                <span>&nbsp;</span>
+                <span>&nbsp;</span>
+            </a>
+            <div class="navbar-menu">
+                <ul class="navbar-menu-items">
+                    <li class="navbar-menu-item">
+                        <a class="navbar-link link-active">Customers</a>
+                    </li>
+                    <li class="navbar-menu-item">
+                        <a class="navbar-link">Contacts</a>
+                    </li>
+                    <li class="navbar-menu-item">
+                        <a class="navbar-link">Dashboard</a>
+                    </li>
+                </ul>
+            </div>
 
-        <div class="navbar-menu">
-            <form class="search-form" action="{% url "search" %}">
-                <fieldset class="search-field">
-                    <input class="search-field-input"
-                        type="text"
-                        id="search"
-                        placeholder="Search for customer or contact..."
-                        name="search"
-                        value="{{ request.GET.search.strip }}"
-                    ></input>
-                </fieldset>
-            </form>
-        </div>
-    </nav>
+            <div class="navbar-menu">
+                <form class="search-form" action="{% url "search" %}">
+                    <fieldset class="search-field">
+                        <input class="search-field-input"
+                            type="text"
+                            id="search"
+                            placeholder="Search for customer or contact..."
+                            name="search"
+                            value="{{ request.GET.search.strip }}"
+                        ></input>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="navbar-menu menu-right">
+                <ul class="navbar-menu-items">
+                    <li class="navbar-menu-item">
+                        <button class="button button-primary button-md">Login</button>
+                    </li>
+                    <li class="navbar-menu-item">
+                        <button class="button button-primary button-md" onclick="location.href='{% url 'register_user' %}'">
+                            Register
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    {% endif %}
 
     {% block breadcrumb %}{% endblock breadcrumb %}
     {% block content %}{% endblock content %}

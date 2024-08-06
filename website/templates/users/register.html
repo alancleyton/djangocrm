@@ -1,28 +1,16 @@
 {% extends "base.html" %}
 
-{% block breadcrumb %}
-<nav class="breadcrumb">
-    <ol class="breadcrumb-items">
-        <li class="breadcrumb-item">
-            <a href="{% url 'customers' %}" class="breadcrumb-link">
-                Users
-            </a>
-        </li>
-        <li class="breadcrumb-item">
-            Create
-        </li>
-    </ol>
-</nav>
-{% endblock breadcrumb %}
-
 {% block content %}
-    <main class="page customer">
-        <div class="page-header">
-            <h2 class="page-header-title">Create User</h2>
-        </div>
-
+    <main class="page small centered">
         <div class="card">
-            <form class="form" action="{% url "create_user" %}" method="POST">
+            <div class="page-header">
+                <a class="page-header-brand centered" name="navbarBrand" href="{% url "customers" %}">
+                    <img src="https://static.djangoproject.com/img/logos/django-logo-negative.svg" alt="logo" width="64px" />
+                    <h2 class="dark">CRM</h2>
+                </a>
+            </div>
+
+            <form class="form" action="{% url "register_user" %}" method="POST">
                 {% csrf_token %}
                 <div class="form-group form-group-md form-group-full {% if form.first_name.errors %}is-invalid{% endif %}">
                     <label for="{{ form.first_name.id_for_label }}">First name</label>
@@ -61,7 +49,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="button button-primary button-md">Submit</button>
+                    <button type="submit" class="button button-primary button-md block">Register</button>
                 </div>
             </form>
         </div>

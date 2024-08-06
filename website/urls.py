@@ -10,7 +10,7 @@ urlpatterns = [
     path('', lambda r: HttpResponseRedirect('customers')),
 
     # Users
-    path('users/create', users_views.create, name='create_user'),
+    path('register/', users_views.register_user, name='register_user'),
 
     # Customers
     path('customers', customers_views.index, name='customers'),

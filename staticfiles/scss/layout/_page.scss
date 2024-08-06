@@ -10,10 +10,40 @@
     justify-content: space-between;
     margin: 0 0 1.5rem;
 
+    &-brand {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      text-decoration: none;
+
+      &.centered {
+        margin: 2.5rem auto;
+      }
+  
+      h2 {
+        font-family: $font-poppins;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-semibold;
+        color: $color-gray-ice;
+
+        &.dark {
+          color: $color-dark;
+        }
+      }
+    }
+
     &-buttons {
       display: inline-flex;
       align-items: center;
       gap: 1rem;
     }
+  }
+
+  &.small {
+    max-width: 640px;
+  }
+
+  &.centered {
+    margin: 6rem auto;
   }
 }

@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
-class UserCreateForm(UserCreationForm):
+class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email', 'username', 'password1', 'password2')
@@ -15,5 +15,4 @@ class UserCreateForm(UserCreationForm):
                 'email',
                 ValidationError('Email address already exists', code='invalid')
             )
-
         return email
