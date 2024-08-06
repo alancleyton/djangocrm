@@ -22,7 +22,7 @@
         {% endfor %}
     {% endif %}
 
-    {% if request.path != '/register/' %}
+    {% if request.path != '/register/' and request.path != '/login/' %}
         <nav id="navBar" class="navbar">
             <a class="navbar-brand" name="navbarBrand" href="{% url "customers" %}">
                 <img src="https://static.djangoproject.com/img/logos/django-logo-negative.svg" alt="logo" width="64px" />
@@ -63,15 +63,34 @@
             </div>
 
             <div class="navbar-menu menu-right">
+                
                 <ul class="navbar-menu-items">
-                    <li class="navbar-menu-item">
-                        <button class="button button-primary button-md">Login</button>
-                    </li>
-                    <li class="navbar-menu-item">
-                        <button class="button button-primary button-md" onclick="location.href='{% url 'register_user' %}'">
-                            Register
-                        </button>
-                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="navbar-menu-item dropdown">
+                            <button class=" dropdown-toggle button button-primary button-md">
+                                {{ user }} ▾
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-menu-item">
+                                    <a href="#">Profile</a>
+                                </li>
+                                <li class="dropdown-menu-item">
+                                    <a href="{% url 'user_logout' %}">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="navbar-menu-item">
+                            <button class="button button-primary button-md" onclick="location.href='{% url 'user_login' %}'">
+                                Login
+                            </button>
+                        </li>
+                        <li class="navbar-menu-item">
+                            <button class="button button-primary button-md" onclick="location.href='{% url 'user_register' %}'">
+                                Register
+                            </button>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
