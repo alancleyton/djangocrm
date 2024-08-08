@@ -3,7 +3,7 @@ from django.http import HttpRequest, HttpResponse
 from django.contrib import auth
 from django.contrib import messages
 
-from website.forms.users import UserRegisterForm, UserLoginForm, UserUpdateForm
+from website.forms.users import UserRegisterForm, UserLoginForm, UserUpdateForm, UserUpdatePasswordForm
 
 def user_register_view(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
@@ -44,6 +44,23 @@ def user_update_view(request: HttpRequest) -> HttpResponse:
     return render(request, 'users/update.html', {
         'user': request.user,
         'form': UserUpdateForm(instance=request.user)
+    })
+
+def user_update_password_view(request: HttpRequest) -> HttpResponse:
+    if request.method == 'POST':
+        form = UserUpdatePasswordForm(data=request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Password successfully updated!')
+            return redirect('user_login')
+        return render(request, 'users/update_password.html', {
+            'user': request.user,
+            'form': form
+        })
+
+    return render(request, 'users/update_password.html', {
+        'user': request.user,
+        'form': UserUpdatePasswordForm(instance=request.user)
     })
 
 def user_logout_view(request: HttpRequest) -> HttpResponse:

@@ -14,6 +14,7 @@ urlpatterns = [
     path('login/', users_views.user_login_view, name='user_login'),
     path('logout/', users_views.user_logout_view, name='user_logout'),
     path('profile/', users_views.user_update_view, name='update_user'),
+    path('profile/password', users_views.user_update_password_view, name='update_user_password'),
 
     # Customers
     path('customers', customers_views.index_customers_view, name='index_customers'),
