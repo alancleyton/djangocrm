@@ -15,10 +15,10 @@ urlpatterns = [
     path('logout/', users_views.user_logout_view, name='user_logout'),
 
     # Customers
-    path('customers', customers_views.index, name='customers'),
-    path('customers/create', customers_views.create, name='create'),
-    path('customers/<int:customer_id>/update', customers_views.update, name='update'),
-    path('customers/<int:customer_id>/show', customers_views.show, name='customer'),
-    path('customers/<int:customer_id>/delete', customers_views.delete, name='delete'),
-    path('search/', customers_views.search, name='search'),
+    path('customers', customers_views.index_customers_view, name='index_customers'),
+    path('customers/create', customers_views.create_customer_view, name='create_customer'),
+    path('customers/<int:customer_id>/update', customers_views.update_customer_view, name='update_customer'),
+    path('customers/<int:customer_id>/show', customers_views.show_customer_view, name='show_customer'),
+    path('customers/<int:customer_id>/delete', customers_views.delete_customer_view, name='delete_customer'),
+    path('search/', customers_views.search_customer_view, name='search_customer'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

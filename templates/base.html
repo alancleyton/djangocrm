@@ -24,7 +24,7 @@
 
     {% if request.path != '/register/' and request.path != '/login/' %}
         <nav id="navBar" class="navbar">
-            <a class="navbar-brand" name="navbarBrand" href="{% url "customers" %}">
+            <a class="navbar-brand" name="navbarBrand" href="{% url "index_customers" %}">
                 <img src="https://static.djangoproject.com/img/logos/django-logo-negative.svg" alt="logo" width="64px" />
                 <h2>CRM</h2>
             </a>
@@ -49,7 +49,7 @@
             </div>
 
             <div class="navbar-menu">
-                <form class="search-form" action="{% url "search" %}">
+                <form class="search-form" action="{% url "search_customer" %}">
                     <fieldset class="search-field">
                         <input class="search-field-input"
                             type="text"

@@ -7,25 +7,25 @@ from django.contrib import messages
 from website.models import Customer
 from website.forms.customers import CustomerForm
 
-def create(request: HttpRequest) -> HttpResponse:
+def create_customer_view(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
-        form = CustomerForm(request.POST, request.FILES)
+        form = CustomerForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'Customer successfully created!')
-            return redirect('customers')
+            return redirect('index_customer')
         return render(request, 'customers/create.html', { 'form': form })
 
     return render(request, 'customers/create.html', { 'form': CustomerForm() })
 
-def update(request: HttpRequest, customer_id: int) -> HttpResponse:
+def update_customer_view(request: HttpRequest, customer_id: int) -> HttpResponse:
     customer = get_object_or_404(Customer, pk=customer_id)
 
     if request.method == 'POST':
-        form = CustomerForm(request.POST, request.FILES, instance=customer)
+        form = CustomerForm(data=request.POST, files=request.FILES, instance=customer)
         if form.is_valid():
             form.save()
-            return redirect('customers')
+            return redirect('index_customers')
         
         render(request, 'customers/update.html', {
             'customer': customer,
@@ -37,32 +37,28 @@ def update(request: HttpRequest, customer_id: int) -> HttpResponse:
         'form': CustomerForm(instance=customer)
     }) 
 
-def index(request: HttpRequest) -> HttpResponse:
+def index_customers_view(request: HttpRequest) -> HttpResponse:
     customers = Customer.objects.all().order_by('-id')
     paginated_customers = Paginator(customers, 10)
     page_number = request.GET.get('page')
     page_customers = paginated_customers.get_page(page_number)
 
-    return render(request, 'customers/index.html', {
-        'customers': customers,
-        'page_customers': page_customers
-    })
+    context = {'customers': customers, 'page_customers': page_customers }
+    return render(request, 'customers/index.html', context)
 
-def show(request: HttpRequest, customer_id: int) -> HttpResponse:
+def show_customer_view(request: HttpRequest, customer_id: int) -> HttpResponse:
     customer = get_object_or_404(Customer, pk=customer_id)
     customer_initials = customer.first_name[0] + customer.last_name[0]
 
-    return render(request, 'customers/show.html', {
-        'customer': customer,
-        'customer_initials': customer_initials
-    })
+    context = { 'customer': customer, 'customer_initials': customer_initials }
+    return render(request, 'customers/show.html', context)
 
-def delete(request: HttpRequest, customer_id: int) -> HttpResponse:
+def delete_customer_view(request: HttpRequest, customer_id: int) -> HttpResponse:
     customer = get_object_or_404(Customer, pk=customer_id)
     customer.delete()
-    return redirect('customers')
+    return redirect('index_customers')
 
-def search(request: HttpRequest) -> HttpResponse:
+def search_customer_view(request: HttpRequest) -> HttpResponse:
     search = request.GET.get('search', '').strip()
     customers = Customer.objects.filter(
         Q(first_name__icontains=search) |
@@ -75,9 +71,7 @@ def search(request: HttpRequest) -> HttpResponse:
     page_number = request.GET.get('page')
     page_customers = paginated_customers.get_page(page_number)
 
-    render(request, 'customers/index.html', {
-        'customers': customers,
-        'page_customers': page_customers
-    })
+    context = { 'customers': customers, 'page_customers': page_customers }
+    return render(request, 'customers/index.html', context)
     
 

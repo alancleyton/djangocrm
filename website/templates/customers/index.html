@@ -15,7 +15,7 @@
             <div class="page-header-buttons">
                 <button
                     class="button button-primary-outline button-md"
-                    onclick="location.href='{% url 'create' %}'"
+                    onclick="location.href='{% url 'create_customer' %}'"
                 >
                     New customer
                 </button>
@@ -39,7 +39,7 @@
                     <tbody>
                         {% for customer in page_customers %}
                         <tr>
-                            <td><a href="{% url 'customer' customer.id %}">
+                            <td><a href="{% url 'show_customer' customer.id %}">
                                 {{ customer.id }}
                             </a></td>
                             <td>
@@ -54,11 +54,11 @@
                                 <div class="d-flex items-center gap-md">
                                     <button
                                         class="button button-primary-outline button-md"
-                                        onclick="location.href='{% url 'update' customer.id %}'"
+                                        onclick="location.href='{% url 'update_customer' customer.id %}'"
                                     >
                                         Update
                                     </button>
-                                    <form action="{% url "delete" customer.id %}" method="POST">
+                                    <form action="{% url "delete_customer" customer.id %}" method="POST">
                                         {% csrf_token %}
                                         <button type="submit" class="button button-danger-outline button-md">
                                             Delete

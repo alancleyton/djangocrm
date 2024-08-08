@@ -4,7 +4,7 @@
 <nav class="breadcrumb">
     <ol class="breadcrumb-items">
         <li class="breadcrumb-item">
-            <a href="{% url 'customers' %}" class="breadcrumb-link">
+            <a href="{% url 'index_customers' %}" class="breadcrumb-link">
                 Customers
             </a>
         </li>
@@ -25,12 +25,12 @@
             <h2 class="page-header-title">Customer details</h2>
             <div class="page-header-buttons">
                 <a
-                    href="{% url "update" customer.id %}"
+                    href="{% url "update_customer" customer.id %}"
                     class="button button-link button-primary-outline button-md"
                 >
                     Update
                 </a>
-                <form action="{% url "delete" customer.id %}" method="POST">
+                <form action="{% url "delete_customer" customer.id %}" method="POST">
                     {% csrf_token %}
                     <button type="submit" class="button button-danger-outline button-md">
                         Delete
