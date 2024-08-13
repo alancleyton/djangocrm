@@ -23,7 +23,7 @@
     <main class="page customer">
         <div class="page-header">
             <h2 class="page-header-title">Customer details</h2>
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and user == customer.owner %}
                 <div class="page-header-buttons">
                     <a
                         href="{% url "update_customer" customer.id %}"

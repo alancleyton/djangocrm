@@ -13,16 +13,18 @@ def create_customer_view(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = CustomerForm(data=request.POST, files=request.FILES)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.owner = request.user
+            user.save()
             messages.success(request, 'Customer successfully created!')
-            return redirect('index_customer')
+            return redirect('index_customers')
         return render(request, 'customers/create.html', { 'form': form })
 
     return render(request, 'customers/create.html', { 'form': CustomerForm() })
 
 @login_required(login_url='user_login')
 def update_customer_view(request: HttpRequest, customer_id: int) -> HttpResponse:
-    customer = get_object_or_404(Customer, pk=customer_id)
+    customer = get_object_or_404(Customer, pk=customer_id, owner=request.user)
 
     if request.method == 'POST':
         form = CustomerForm(data=request.POST, files=request.FILES, instance=customer)
@@ -58,7 +60,7 @@ def show_customer_view(request: HttpRequest, customer_id: int) -> HttpResponse:
 
 @login_required(login_url='user_login')
 def delete_customer_view(request: HttpRequest, customer_id: int) -> HttpResponse:
-    customer = get_object_or_404(Customer, pk=customer_id)
+    customer = get_object_or_404(Customer, pk=customer_id, owner=request.user)
     customer.delete()
     return redirect('index_customers')
 

@@ -54,7 +54,7 @@
                             <td>{{ customer.phone }}</td>
                             <td>{{ customer.company }}</td>
                             <td>{{ customer.owner }}</td>
-                            {% if user.is_authenticated %}
+                            {% if user.is_authenticated and user == customer.owner %}
                                 <td>
                                     <div class="d-flex items-center gap-md">
                                         <button
