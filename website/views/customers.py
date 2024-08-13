@@ -3,10 +3,12 @@ from django.http import HttpRequest, HttpResponse
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from website.models import Customer
 from website.forms.customers import CustomerForm
 
+@login_required(login_url='user_login')
 def create_customer_view(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = CustomerForm(data=request.POST, files=request.FILES)
@@ -18,6 +20,7 @@ def create_customer_view(request: HttpRequest) -> HttpResponse:
 
     return render(request, 'customers/create.html', { 'form': CustomerForm() })
 
+@login_required(login_url='user_login')
 def update_customer_view(request: HttpRequest, customer_id: int) -> HttpResponse:
     customer = get_object_or_404(Customer, pk=customer_id)
 
@@ -53,6 +56,7 @@ def show_customer_view(request: HttpRequest, customer_id: int) -> HttpResponse:
     context = { 'customer': customer, 'customer_initials': customer_initials }
     return render(request, 'customers/show.html', context)
 
+@login_required(login_url='user_login')
 def delete_customer_view(request: HttpRequest, customer_id: int) -> HttpResponse:
     customer = get_object_or_404(Customer, pk=customer_id)
     customer.delete()

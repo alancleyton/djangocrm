@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from website.forms.users import UserRegisterForm, UserLoginForm, UserUpdateForm, UserUpdatePasswordForm
@@ -29,6 +30,7 @@ def user_login_view(request: HttpRequest) -> HttpResponse:
 
     return render(request, 'users/login.html', { 'form': UserLoginForm() })
 
+@login_required(login_url='user_login')
 def user_update_view(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = UserUpdateForm(data=request.POST, instance=request.user)
@@ -46,6 +48,7 @@ def user_update_view(request: HttpRequest) -> HttpResponse:
         'form': UserUpdateForm(instance=request.user)
     })
 
+@login_required(login_url='user_login')
 def user_update_password_view(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = UserUpdatePasswordForm(data=request.POST, instance=request.user)

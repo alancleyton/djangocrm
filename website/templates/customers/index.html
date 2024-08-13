@@ -12,14 +12,16 @@
     <main class="page customers">
         <div class="page-header">
             <h2 class="page-header-title">Customers</h2>
-            <div class="page-header-buttons">
-                <button
-                    class="button button-primary-outline button-md"
-                    onclick="location.href='{% url 'create_customer' %}'"
-                >
-                    New customer
-                </button>
-            </div>
+            {% if  user.is_authenticated %}
+                <div class="page-header-buttons">
+                    <button
+                        class="button button-primary-outline button-md"
+                        onclick="location.href='{% url 'create_customer' %}'"
+                    >
+                        New customer
+                    </button>
+                </div>
+            {% endif %}
         </div>
 
         <div class="card">
@@ -33,7 +35,9 @@
                             <th>Phone</th>
                             <th>Company</th>
                             <th>Owner</th>
-                            <th>Actions</th>
+                            {% if user.is_authenticated %}
+                                <th>Actions</th>
+                            {% endif %}
                         </tr>
                     </thead>
                     <tbody>
@@ -50,22 +54,24 @@
                             <td>{{ customer.phone }}</td>
                             <td>{{ customer.company }}</td>
                             <td>{{ customer.owner }}</td>
-                            <td>
-                                <div class="d-flex items-center gap-md">
-                                    <button
-                                        class="button button-primary-outline button-md"
-                                        onclick="location.href='{% url 'update_customer' customer.id %}'"
-                                    >
-                                        Update
-                                    </button>
-                                    <form action="{% url "delete_customer" customer.id %}" method="POST">
-                                        {% csrf_token %}
-                                        <button type="submit" class="button button-danger-outline button-md">
-                                            Delete
+                            {% if user.is_authenticated %}
+                                <td>
+                                    <div class="d-flex items-center gap-md">
+                                        <button
+                                            class="button button-primary-outline button-md"
+                                            onclick="location.href='{% url 'update_customer' customer.id %}'"
+                                        >
+                                            Update
                                         </button>
-                                    </form>
-                                </div>
-                            </td>
+                                        <form action="{% url "delete_customer" customer.id %}" method="POST">
+                                            {% csrf_token %}
+                                            <button type="submit" class="button button-danger-outline button-md">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </tbody>

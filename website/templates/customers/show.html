@@ -23,20 +23,22 @@
     <main class="page customer">
         <div class="page-header">
             <h2 class="page-header-title">Customer details</h2>
-            <div class="page-header-buttons">
-                <a
-                    href="{% url "update_customer" customer.id %}"
-                    class="button button-link button-primary-outline button-md"
-                >
-                    Update
-                </a>
-                <form action="{% url "delete_customer" customer.id %}" method="POST">
-                    {% csrf_token %}
-                    <button type="submit" class="button button-danger-outline button-md">
-                        Delete
-                    </button>
-                </form>
-            </div>
+            {% if user.is_authenticated %}
+                <div class="page-header-buttons">
+                    <a
+                        href="{% url "update_customer" customer.id %}"
+                        class="button button-link button-primary-outline button-md"
+                    >
+                        Update
+                    </a>
+                    <form action="{% url "delete_customer" customer.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="button button-danger-outline button-md">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            {% endif %}
         </div>
         <div class="card">
             <div class="customer-profile">
