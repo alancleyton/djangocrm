@@ -14,7 +14,12 @@ A simple CRUD app made with Django Framework
   pip3 install -r requirements.txt
 ```
 
-.4 Run server locally
+.4 Run all database migrations
+```bash
+  python3 manage.py migrate
+```
+
+.5 Run server locally
 ```bash
   python3 manage.py runserver
 ```
